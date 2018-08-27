@@ -7,8 +7,9 @@ class Connection
     private $db_user = 'root';
     private $db_password = '';
 
-    public function __construct() {
-        try{
+    public function __construct()
+    {
+        try {
             $this->connection = new PDO("$this->db_dsn", "$this->db_user", "$this->db_password");
             $this->connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         } catch (PDOException $e) {
@@ -16,7 +17,8 @@ class Connection
         }
     }
 
-    protected function getConnection() {
+    protected function getConnection()
+    {
         return $this->connection;
     }
 }
