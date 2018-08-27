@@ -4,7 +4,7 @@ include_once '../Model/User.Model.php';
 
 class UserDAO extends Connection
 {
-    public function Insert(User $User)
+    public function insert(User $User)
     {
         try {
             $connection = $this->getConnection();
@@ -24,21 +24,21 @@ class UserDAO extends Connection
             
             $executionResult = $stmt->execute();
             
-            if($executionResult) {
+            if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error. ' . $stmt->errorCode() . ' - '
                         . implode($stmt->errorInfo()));
             }
             
         } catch (PDOException $e) {
-            if((isset($connection)) && ($connection->inTransaction())) {
+            if ((isset($connection)) && ($connection->inTransaction())) {
                 $connection->rollBack();
             }
             
             echo $e->getMessage();
-            return FALSE;
+            return false;
             
         } finally {
             if (isset($connection)) {
@@ -52,7 +52,7 @@ class UserDAO extends Connection
         try {
             $connection = $this->getConnection();
 
-            $sql = 'SELECT * FROM user '. $where;
+            $sql = 'SELECT Id, First_Name, Last_Name, Email, Password, Gender, Birthdate, Admin, Status, Register_Date, Modified_Date FROM user '. $where;
             $stmt = $connection->prepare($sql);
             $executionResult = $stmt->execute();
             
@@ -68,7 +68,7 @@ class UserDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -99,7 +99,7 @@ class UserDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error.' . $stmt->errorCode() . ' - ' .
                 implode($stmt->errorInfo()));
@@ -111,7 +111,7 @@ class UserDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -134,7 +134,7 @@ class UserDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException("Execution Error." . $stmt->errorCode() . " - " .
                 implode($stmt->errorInfo()));
@@ -146,7 +146,7 @@ class UserDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -168,7 +168,7 @@ class UserDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error.' . $stmt->errorCode() . ' - ' .
                 implode($stmt->errorInfo()));
@@ -180,7 +180,7 @@ class UserDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -203,7 +203,7 @@ class UserDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error.' . $stmt->errorCode() . ' - ' .
                 implode($stmt->errorInfo()));
@@ -215,7 +215,7 @@ class UserDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);

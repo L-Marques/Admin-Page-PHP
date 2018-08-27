@@ -4,7 +4,7 @@ include_once '../Model/Comment.Model.php';
 
 class CommentDAO extends Connection
 {
-    public function Insert(Comment $Comment)
+    public function insert(Comment $Comment)
     {
         try {
             $connection = $this->getConnection();
@@ -20,21 +20,21 @@ class CommentDAO extends Connection
             
             $executionResult = $stmt->execute();
             
-            if($executionResult) {
+            if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error. ' . $stmt->errorCode() . ' - '
                         . implode($stmt->errorInfo()));
             }
             
         } catch (PDOException $e){
-            if((isset($connection)) && ($connection->inTransaction())) {
+            if ((isset($connection)) && ($connection->inTransaction())) {
                 $connection->rollBack();
             }
             
             echo $e->getMessage();
-            return FALSE;
+            return false;
             
         } finally {
             if (isset($connection)) {
@@ -48,7 +48,7 @@ class CommentDAO extends Connection
         try{
             $connection = $this->getConnection();
 
-            $sql = 'SELECT (Id, Text, Product_Id, User_Id, Status, Register_Date, Modified_Date) FROM comment '. $where;
+            $sql = 'SELECT Id, Text, Product_Id, User_Id, Status, Register_Date, Modified_Date FROM comment '. $where;
             
             $stmt = $connection->prepare($sql);
             $executionResult = $stmt->execute();
@@ -65,7 +65,7 @@ class CommentDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -89,7 +89,7 @@ class CommentDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error.' . $stmt->errorCode() . ' - ' .
                 implode($stmt->errorInfo()));
@@ -101,7 +101,7 @@ class CommentDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -124,7 +124,7 @@ class CommentDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException("Execution Error." . $stmt->errorCode() . " - " .
                 implode($stmt->errorInfo()));
@@ -136,7 +136,7 @@ class CommentDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -159,7 +159,7 @@ class CommentDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error.' . $stmt->errorCode() . ' - ' .
                 implode($stmt->errorInfo()));
@@ -171,7 +171,7 @@ class CommentDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -194,7 +194,7 @@ class CommentDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error.' . $stmt->errorCode() . ' - ' .
                 implode($stmt->errorInfo()));
@@ -206,7 +206,7 @@ class CommentDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);

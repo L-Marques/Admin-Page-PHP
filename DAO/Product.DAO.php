@@ -4,7 +4,7 @@ include_once '../Model/Product.Model.php';
 
 class ProductDAO extends Connection
 {
-    public function Insert(Product $Product)
+    public function insert(Product $Product)
     {
         try {
             $connection = $this->getConnection();
@@ -21,21 +21,21 @@ class ProductDAO extends Connection
             
             $executionResult = $stmt->execute();
             
-            if($executionResult) {
+            if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error. ' . $stmt->errorCode() . ' - '
                         . implode($stmt->errorInfo()));
             }
             
         } catch (PDOException $e){
-            if((isset($connection)) && ($connection->inTransaction())) {
+            if ((isset($connection)) && ($connection->inTransaction())) {
                 $connection->rollBack();
             }
             
             echo $e->getMessage();
-            return FALSE;
+            return false;
             
         } finally {
             if (isset($connection)) {
@@ -49,7 +49,7 @@ class ProductDAO extends Connection
         try{
             $connection = $this->getConnection();
 
-            $sql = 'SELECT (Id, Name, Description, Price, Currency, Category_Id, Category_Name, Status, Register_Date, Modified_Date) FROM product_category '. $where;
+            $sql = 'SELECT Id, Name, Description, Price, Currency, Category_Id, Category_Name, Status, Register_Date, Modified_Date FROM product_category '. $where;
             
             $stmt = $connection->prepare($sql);
             $executionResult = $stmt->execute();
@@ -66,7 +66,7 @@ class ProductDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -94,7 +94,7 @@ class ProductDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error.' . $stmt->errorCode() . ' - ' .
                 implode($stmt->errorInfo()));
@@ -106,7 +106,7 @@ class ProductDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -129,7 +129,7 @@ class ProductDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException("Execution Error." . $stmt->errorCode() . " - " .
                 implode($stmt->errorInfo()));
@@ -141,7 +141,7 @@ class ProductDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -158,13 +158,13 @@ class ProductDAO extends Connection
             $sql = 'UPDATE product SET Status = 0 WHERE Id = ? ';
 
             $stmt = $connection->prepare($sql);
-            $stmt->bindValue(1, $Produto->getId(), PDO::PARAM_INT);
+            $stmt->bindValue(1, $Product->getId(), PDO::PARAM_INT);
 
             $executionResult = $stmt->execute();
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error.' . $stmt->errorCode() . ' - ' .
                 implode($stmt->errorInfo()));
@@ -176,7 +176,7 @@ class ProductDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -193,13 +193,13 @@ class ProductDAO extends Connection
             $sql = 'UPDATE product SET Status = 1 WHERE Id = ? ';
 
             $stmt = $connection->prepare($sql);
-            $stmt->bindValue(1, $Produto->getId(), PDO::PARAM_INT);
+            $stmt->bindValue(1, $Product->getId(), PDO::PARAM_INT);
 
             $executionResult = $stmt->execute();
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error.' . $stmt->errorCode() . ' - ' .
                 implode($stmt->errorInfo()));
@@ -211,7 +211,7 @@ class ProductDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);

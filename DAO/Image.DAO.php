@@ -4,7 +4,7 @@ include_once '../Model/Image.Model.php';
 
 class ImageDAO extends Connection
 {
-    public function Insert(Image $Image)
+    public function insert(Image $Image)
     {
         try {
             $connection = $this->getConnection();
@@ -24,21 +24,21 @@ class ImageDAO extends Connection
             
             $executionResult = $stmt->execute();
             
-            if($executionResult) {
+            if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error. ' . $stmt->errorCode() . ' - '
                         . implode($stmt->errorInfo()));
             }
             
         } catch (PDOException $e){
-            if((isset($connection)) && ($connection->inTransaction())) {
+            if ((isset($connection)) && ($connection->inTransaction())) {
                 $connection->rollBack();
             }
             
             echo $e->getMessage();
-            return FALSE;
+            return false;
             
         } finally {
             if (isset($connection)) {
@@ -52,7 +52,7 @@ class ImageDAO extends Connection
         try{
             $connection = $this->getConnection();
 
-            $sql = 'SELECT (Id, File_Name, File_Type, File_Size, File_Path, Product_Id, Thumbnail, Status, Register_Date, Modified_Date) '
+            $sql = 'SELECT Id, File_Name, File_Type, File_Size, File_Path, Product_Id, Thumbnail, Status, Register_Date, Modified_Date '
                  . 'FROM image '. $where;
             
             $stmt = $connection->prepare($sql);
@@ -70,7 +70,7 @@ class ImageDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -100,7 +100,7 @@ class ImageDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error.' . $stmt->errorCode() . ' - ' .
                 implode($stmt->errorInfo()));
@@ -112,7 +112,7 @@ class ImageDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -136,7 +136,7 @@ class ImageDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException("Execution Error." . $stmt->errorCode() . " - " .
                 implode($stmt->errorInfo()));
@@ -148,7 +148,7 @@ class ImageDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -171,7 +171,7 @@ class ImageDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error.' . $stmt->errorCode() . ' - ' .
                 implode($stmt->errorInfo()));
@@ -183,7 +183,7 @@ class ImageDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -206,7 +206,7 @@ class ImageDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error.' . $stmt->errorCode() . ' - ' .
                 implode($stmt->errorInfo()));
@@ -218,7 +218,7 @@ class ImageDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);

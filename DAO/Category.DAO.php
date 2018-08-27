@@ -4,7 +4,7 @@ include_once '../Model/Category.Model.php';
 
 class CategoryDAO extends Connection
 {
-    public function Insert(Category $Category)
+    public function insert(Category $Category)
     {
         try {
             $connection = $this->getConnection();
@@ -17,21 +17,21 @@ class CategoryDAO extends Connection
             
             $executionResult = $stmt->execute();
             
-            if($executionResult) {
+            if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error. ' . $stmt->errorCode() . ' - '
                         . implode($stmt->errorInfo()));
             }
             
         } catch (PDOException $e) {
-            if((isset($connection)) && ($connection->inTransaction())) {
+            if ((isset($connection)) && ($connection->inTransaction())) {
                 $connection->rollBack();
             }
             
             echo $e->getMessage();
-            return FALSE;
+            return false;
             
         } finally {
             if (isset($connection)) {
@@ -45,7 +45,7 @@ class CategoryDAO extends Connection
         try{
             $connection = $this->getConnection();
 
-            $sql = 'SELECT (Id, Name, Status, Register_Date, Modified_Date) FROM category '. $where;
+            $sql = 'SELECT Id, Name, Status, Register_Date, Modified_Date FROM category '. $where;
             $stmt = $connection->prepare($sql);
             $executionResult = $stmt->execute();
             
@@ -61,7 +61,7 @@ class CategoryDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -85,7 +85,7 @@ class CategoryDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error.' . $stmt->errorCode() . ' - ' .
                 implode($stmt->errorInfo()));
@@ -97,7 +97,7 @@ class CategoryDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -120,7 +120,7 @@ class CategoryDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException("Execution Error." . $stmt->errorCode() . " - " .
                 implode($stmt->errorInfo()));
@@ -132,7 +132,7 @@ class CategoryDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -155,7 +155,7 @@ class CategoryDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error.' . $stmt->errorCode() . ' - ' .
                 implode($stmt->errorInfo()));
@@ -167,7 +167,7 @@ class CategoryDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
@@ -190,7 +190,7 @@ class CategoryDAO extends Connection
             
             if ($executionResult) {
                 $connection->commit();
-                return TRUE;
+                return true;
             } else {
                 throw new PDOException('Execution Error.' . $stmt->errorCode() . ' - ' .
                 implode($stmt->errorInfo()));
@@ -202,7 +202,7 @@ class CategoryDAO extends Connection
             }
             
             echo $exc->getMessage();
-            return FALSE;
+            return false;
         } finally {
             if (isset($connection)) {
                 unset($connection);
